@@ -452,12 +452,22 @@ const IMGS=[
  ["experience-tiger-fishing","lake","Fishing on the lake"]
 ];
 const gal=document.getElementById('gal');
+
 IMGS.forEach((g,i)=>{
+  const b=document.createElement('button');
+  b.dataset.cat=g[1];
+  b.dataset.i=i;
+  b.setAttribute('aria-label','View '+g[2]);
+
   const imagePath = /\.(jpg|jpeg|webp)$/i.test(g[0])
-   ? `asset/images/${g[0]}`
-   : `asset/images/${g[0]}.webp`;
- b.innerHTML=`<img src="${imagePath}" alt="${g[2]}" loading="lazy" onerror="this.remove()"><span class="cap">${g[2]}</span>`;
+    ? `asset/images/${g[0]}`
+    : `asset/images/${g[0]}.webp`;
+
+  b.innerHTML=`<img src="${imagePath}" alt="${g[2]}" loading="lazy" onerror="this.remove()"><span class="cap">${g[2]}</span>`;
+
+  gal.appendChild(b);
 });
+
 document.getElementById('filters').addEventListener('click',e=>{
  const f=e.target.dataset.f;if(!f)return;
  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===e.target));
