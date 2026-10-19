@@ -439,7 +439,7 @@ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classLi
 
 // gallery
 const IMGS=[
- ["hero-villa-exterior","exterior","Aerial view of the villa and grounds"],
+ ["hero-elephants.jpg","exterior","Elephants in the Kariba wilderness"],
  ["property-villa-verandah","exterior","The villa verandah and lawn"],
  ["facility-pool-deck","grounds","Pool deck by day"],
  ["facility-pool-night","grounds","The pool at night"],
@@ -453,9 +453,10 @@ const IMGS=[
 ];
 const gal=document.getElementById('gal');
 IMGS.forEach((g,i)=>{
- const b=document.createElement('button');b.dataset.cat=g[1];b.dataset.i=i;b.setAttribute('aria-label','View '+g[2]);
- b.innerHTML=`<img src="asset/images/${g[0]}.webp" alt="${g[2]}" loading="lazy" onerror="this.remove()"><span class="cap">${g[2]}</span>`;
- gal.appendChild(b);
+  const imagePath = /\.(jpg|jpeg|webp)$/i.test(g[0])
+   ? `asset/images/${g[0]}`
+   : `asset/images/${g[0]}.webp`;
+ b.innerHTML=`<img src="${imagePath}" alt="${g[2]}" loading="lazy" onerror="this.remove()"><span class="cap">${g[2]}</span>`;
 });
 document.getElementById('filters').addEventListener('click',e=>{
  const f=e.target.dataset.f;if(!f)return;
